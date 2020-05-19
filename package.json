@@ -1,0 +1,19 @@
+{
+  "name": "snap-bot",
+  "version": "1.0.0",
+  "description": "twitter bot to snap tweet image",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theNvN/snap-bot.git"
+  },
+  "author": "Naveen Sahu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/theNvN/snap-bot/issues"
+  },
+  "homepage": "https://github.com/theNvN/snap-bot#readme"
+}
