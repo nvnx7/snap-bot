@@ -5,13 +5,20 @@
       Tweet Template
     </title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
+    <header>Snap Bot</header>
     <div id="wrapper">
       <div id="target"></div>
+      <button id="download-btn">Download</button>
     </div>
     <script src="https://platform.twitter.com/widgets.js"></script>
-    <script src="embedTweet.js"></script>
+    <script type="module" src="app.js"></script>
+    <script src="./embedTweet.js"></script>
   </body>
 </html>
