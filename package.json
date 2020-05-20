@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/theNvN/snap-bot/issues"
   },
-  "homepage": "https://github.com/theNvN/snap-bot#readme"
+  "homepage": "https://github.com/theNvN/snap-bot#readme",
+  "dependencies": {
+    "html2canvas": "^1.0.0-rc.5",
+    "twit": "^2.2.11"
+  }
 }
