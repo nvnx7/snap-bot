@@ -9,5 +9,3 @@ const options = {
 function embedTweet(id) {
   twttr.widgets.createTweet(id, document.getElementById("target"), options);
 }
-
-export { embedTweet };
