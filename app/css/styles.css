@@ -1,8 +1,8 @@
 html,
 body {
-  font-family: "Roboto";
-  font-weight: 400;
-  background: whitesmoke;
+  font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
 }
 
 header {
@@ -10,16 +10,6 @@ header {
   font-weight: 700;
   width: 100%;
   text-align: center;
-}
-
-#wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 500px;
-  margin: auto;
-  background-color: red;
 }
 
 button {

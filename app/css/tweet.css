@@ -1,0 +1,85 @@
+:root {
+  --pad: 20px 20px 10px 20px;
+  --background: #000000;
+  --color1: #ffffff;
+  --color2: #8899a6;
+  --twitter-blue: #00acee;
+}
+
+/* html,
+body {
+  font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--color1);
+} */
+
+#wrapper {
+  width: 490px;
+  border: 1px solid #66757f;
+  border-radius: 5px;
+  background-color: var(--background);
+  line-height: 1.4;
+  /* font-family: Helvetica, Roboto, "Segoe UI", Calibri, sans-serif; */
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--color1);
+}
+
+#tweet-container {
+  display: flex;
+  flex-direction: column;
+  padding: var(--pad);
+}
+
+#tweet-header {
+  display: flex;
+  flex-direction: row;
+  /*   background: red; */
+  align-items: center;
+}
+
+#profile-pic {
+  max-width: 100%;
+  max-height: 36px;
+  border-radius: 50%;
+  margin-right: 9px;
+}
+
+#sub-header {
+  /*   background: green; */
+}
+
+#author {
+  font-weight: 700;
+}
+
+#username {
+  font-size: 14px;
+  color: var(--color2);
+}
+
+#icon {
+  display: block;
+  align-self: flex-start;
+  /*   justify-self: flex-end; */
+  color: var(--twitter-blue);
+  font-size: 16px;
+  margin-left: auto;
+}
+
+#tweet-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  color: var(--color2);
+}
+
+#heart-icon {
+  margin-right: 5px;
+}
+
+#tweet-time {
+  margin-left: 12px;
+}

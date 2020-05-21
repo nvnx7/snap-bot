@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/theNvN/snap-bot#readme",
   "dependencies": {
-    "html2canvas": "^1.0.0-rc.5",
     "twit": "^2.2.11"
   },
   "devDependencies": {
