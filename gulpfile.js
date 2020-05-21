@@ -8,7 +8,7 @@ const cleanCss = require("gulp-clean-css");
 const useref = require("gulp-useref");
 const browserSync = require("browser-sync").create();
 
-gulp.task("scripts", () => {
+function scripts() {
   return gulp
     .src("app/js/*.js")
     .pipe(concat("concat.js"))
@@ -25,40 +25,40 @@ gulp.task("scripts", () => {
   //     stream: true,
   //   })
   // );
-});
+}
 
-gulp.task("styles", () => {
+function styles() {
   return gulp
     .src("app/css/*.css")
     .pipe(autoprefix())
+    .pipe(browserSync.stream())
     .pipe(concat("concat.css"))
     .pipe(cleanCss())
     .pipe(rename("styles.min.css"))
     .pipe(gulp.dest("dist/css"));
-  // .pipe(
-  //   browserSync.reload({
-  //     stream: true,
-  //   })
-  // );
-});
+}
 
-gulp.task("copy", () => {
+function copy() {
   return gulp
     .src("app/*.html")
     .pipe(useref({ noAssets: true }))
     .pipe(gulp.dest("dist"));
-});
+}
 
-gulp.task("browserSync", () => {
+function browserSyncInit() {
   browserSync.init({
     server: {
-      baseDir: "dist",
+      baseDir: "app",
+      index: "index.html",
     },
   });
-});
+}
 
-// gulp.task("watch", ["browserSync", "styles", "scripts", "copy"], () => {
-//   gulp.watch("app/css/*.css", gulp.series(["styles"]));
-//   gulp.watch("app/js/*.js", gulp.series(["scripts"]));
-//   gulp.watch("app/*.html", gulp.series(["copy"]));
-// });
+function watch() {
+  browserSyncInit();
+  gulp.watch("app/css/*.css", styles);
+  gulp.watch("app/js/*.js").on("change", browserSync.reload);
+  gulp.watch("app/*.html").on("change", browserSync.reload);
+}
+
+exports.watch = watch;
