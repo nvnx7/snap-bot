@@ -1,5 +1,5 @@
 :root {
-  --pad: 20px 20px 10px 20px;
+  --pad: 20px 20px 12px 20px;
   --background: #000000;
   --color1: #ffffff;
   --color2: #8899a6;
@@ -59,25 +59,38 @@ body {
   color: var(--color2);
 }
 
-#icon {
+#twitter-icon {
+  width: 28px;
+  height: 28px;
   display: block;
   align-self: flex-start;
-  /*   justify-self: flex-end; */
-  color: var(--twitter-blue);
-  font-size: 16px;
+  /* background-color: yellow; */
   margin-left: auto;
+}
+
+#twitter-icon > img {
+  width: 100%;
 }
 
 #tweet-footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: flex-start;
   font-size: 14px;
   color: var(--color2);
 }
 
 #heart-icon {
-  margin-right: 5px;
+  width: 19px;
+  height: 19px;
+  margin-right: 4px;
+  /* background-color: yellow; */
+}
+
+#heart-icon > img {
+  width: 100%;
+  margin: auto;
 }
 
 #tweet-time {

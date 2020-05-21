@@ -9,8 +9,6 @@ const options = {
 shotOptions = {
   allowTaint: true,
   logging: true,
-  width: 100,
-  height: 50,
 };
 
 function embedTweet(id) {
@@ -18,7 +16,7 @@ function embedTweet(id) {
 }
 
 function takeShot() {
-  html2canvas(document.getElementById("tweet-container"), shotOptions).then(
+  html2canvas(document.getElementById("wrapper"), shotOptions).then(
     (canvas) => {
       document.body.appendChild(canvas);
     }
