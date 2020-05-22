@@ -8,9 +8,13 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <link rel="stylesheet" type="text/css" href="css/tweet.css" />
     <!-- endbuild -->
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
   </head>
 
@@ -18,43 +22,58 @@
     <header>Snap Bot</header>
     <div id="target"></div>
     <div id="wrapper">
-      <div id="tweet-container">
-        <div id="tweet-header">
-          <img
-            id="profile-pic"
-            src="https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg"
-            alt="avatar"
-          />
-          <div id="sub-header">
-            <div id="author">Wisdom Theory</div>
-            <div id="username">@wealth_theory</div>
+      <div id="tweet-wrapper" class="dark">
+        <div id="tweet-container">
+          <div id="tweet-header">
+            <img
+              id="profile-pic"
+              src="https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg"
+              alt="avatar"
+            />
+            <div id="sub-header">
+              <div id="author-name-container">
+                <div id="author">
+                  Wisdom Theory
+                </div>
+                <div id="verified-badge-container">
+                  <img src="img/verified.png" alt="verified badge" />
+                </div>
+              </div>
+              <div id="username">@wealth_theory</div>
+            </div>
+            <div id="twitter-icon">
+              <img src="img/twitter_logo.png" alt="twitter logo" />
+            </div>
           </div>
-          <div id="twitter-icon">
-            <img src="img/twitter_logo.png" alt="twitter logo" />
+          <div id="tweet-text">
+            <p>
+              Everyone you meet is fighting a battle you know nothing about.
+              <br /><br />
+              Be kind.
+              <br /><br />Always.
+            </p>
           </div>
-        </div>
-        <div id="tweet-text">
-          <p>
-            Everyone you meet is fighting a battle you know nothing about.
-            <br /><br />
-            Be kind.
-            <br /><br />Always.
-          </p>
-        </div>
-        <div id="tweet-footer">
-          <div id="heart-icon">
-            <img src="img/liked.png" alt="like icon" />
+          <div id="tweet-footer">
+            <div id="heart-icon">
+              <img id="heart-img" src="img/liked.png" alt="like icon" />
+            </div>
+            <div id="like-count">234</div>
+            <div id="tweet-time">3:04 AM - May 20, 2020</div>
           </div>
-          <div id="like-count">234</div>
-          <div id="tweet-time">3:04 AM - May 20, 2020</div>
         </div>
       </div>
+      <div id="image-wrapper">
+        <div id="image-container"></div>
+      </div>
     </div>
-    <button id="download-btn">Download</button>
+    <a id="download-btn" class="waves-effect waves-light btn-large">
+      Download
+    </a>
 
     <script src="https://platform.twitter.com/widgets.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <!-- build:js js/main.min.js -->
+    <script src="js/tweetPreview.js"></script>
     <script src="js/embedTweet.js"></script>
     <script src="js/main.js"></script>
     <!-- endbuild -->
