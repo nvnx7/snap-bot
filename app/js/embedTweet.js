@@ -18,7 +18,7 @@ function embedTweet(id) {
 function takeShot() {
   html2canvas(document.getElementById("tweet-wrapper"), shotOptions).then(
     (canvas) => {
-      document.getElementById("image-container").appendChild(canvas);
+      document.body.appendChild(canvas);
     }
   );
 }

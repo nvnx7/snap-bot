@@ -14,8 +14,8 @@ header {
 
 #wrapper {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -24,7 +24,45 @@ header {
   font-weight: 700;
 }
 
-.label {
-  font-weight: 700;
-  font-size: x-large;
+#customization-wrapper {
+  width: 400px;
+  display: flex;
+  /* flex-direction: column; */
+  /* background-color: yellow; */
+  /* align-self: stretch; */
+  justify-content: space-between;
+  /* justify-self: stretch; */
+  padding: 20px;
 }
+
+/* .label {
+  font-weight: 700;
+  font-size: large;
+} */
+
+.control-container {
+  display: flex;
+  flex-direction: row;
+  color: black;
+}
+
+label {
+  margin: 10px;
+}
+
+label > span {
+  color: black;
+  /* margin: 10px; */
+}
+
+/* For changing defaults of Material CSS colors */
+input[type="radio"]:checked + span::after,
+input[type="checkbox"].filled-in:checked + span:not(.lever):after {
+  background-color: #00acee;
+  border: 2px solid #00acee;
+}
+
+/* input[type="checkbox"].filled-in:checked + span:not(.lever):after {
+  background-color: red;
+  border: 2px solid red;
+} */

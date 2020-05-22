@@ -121,11 +121,3 @@
 #tweet-time {
   margin-left: 12px;
 }
-
-#customization-wrapper {
-  display: flex;
-  flex-direction: column;
-  background-color: yellow;
-  align-self: stretch;
-  /* justify-self: stretch; */
-}
