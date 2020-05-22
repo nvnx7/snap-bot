@@ -55,15 +55,41 @@
           </div>
           <div id="tweet-footer">
             <div id="heart-icon">
-              <img id="heart-img" src="img/liked.png" alt="like icon" />
+              <img id="heart-img" src="img/normal.png" alt="like icon" />
             </div>
             <div id="like-count">234</div>
             <div id="tweet-time">3:04 AM - May 20, 2020</div>
           </div>
         </div>
       </div>
-      <div id="image-wrapper">
-        <div id="image-container"></div>
+      <div id="customization-wrapper">
+        <div id="customization-label" class="label">Customize Further</div>
+
+        <div id="theme-control" class="control-container">
+          <div class="control-label">THEME</div>
+          <label for="light">
+            <input type="radio" id="light" name="theme" value="light" />
+            <span>Light</span>
+          </label>
+          <label for="dark">
+            <input type="radio" id="dark" name="theme" value="dark" checked />
+            <span>Dark</span>
+          </label>
+        </div>
+
+        <div id="like-control" class="control-container">
+          <div class="control-label">LIKED</div>
+          <label for="like">
+            <input
+              type="checkbox"
+              id="like"
+              name="like"
+              value="like"
+              class="filled-in"
+            />
+            <span>Like Tweet</span>
+          </label>
+        </div>
       </div>
     </div>
     <a id="download-btn" class="waves-effect waves-light btn-large">

@@ -17,13 +17,16 @@ function processText(text) {
 
 function setTweetText(text) {
   const processedText = processText(text);
-  tweetWrapper.querySelector("#tweet-text").innerHTML = processedText;
+  // TODO May need to wrap text with <p>....</p>
+  tweetWrapper.querySelector(
+    "#tweet-text"
+  ).innerHTML = `<p>${processedText}</p>`;
 }
 
 function setTweetHeader(profilePicUrl, author, username, isVerified = false) {
   tweetWrapper.querySelector("#profile-pic").src = profilePicUrl;
   tweetWrapper.querySelector("#author").innerHTML = author;
-  tweetWrapper.querySelector("#username").innerHTML = username;
+  tweetWrapper.querySelector("#username").innerHTML = `@${username}`;
 
   if (isVerified) {
     tweetWrapper.querySelector(
@@ -40,10 +43,10 @@ function setTweetLiked(isLiked) {
 
   if (isLiked) {
     imgSrc = "img/liked.png";
-    textColor = "red";
+    textColor = "#ff0000";
   } else {
     imgSrc = "img/normal.png";
-    textColor = "white";
+    textColor = "#8899a6";
   }
 
   tweetWrapper.querySelector("#heart-img").src = imgSrc;
@@ -55,8 +58,8 @@ function setTweetFooter(likeCount, timeString) {
   tweetWrapper.querySelector("#tweet-time").innerHTML = timeString;
 }
 
-function switchTheme() {
-  if (tweetWrapper.classList.contains("dark")) {
+function switchTheme(theme) {
+  if (theme === "light") {
     tweetWrapper.classList.remove("dark");
     tweetWrapper.classList.add("light");
   } else {
