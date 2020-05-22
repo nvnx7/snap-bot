@@ -6,7 +6,7 @@ const options = {
   theme: "dark",
 };
 
-shotOptions = {
+const shotOptions = {
   allowTaint: true,
   logging: true,
 };
