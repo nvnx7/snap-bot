@@ -16,9 +16,9 @@ function embedTweet(id) {
 }
 
 function takeShot() {
-  html2canvas(document.getElementById("wrapper"), shotOptions).then(
+  html2canvas(document.getElementById("tweet-wrapper"), shotOptions).then(
     (canvas) => {
-      document.body.appendChild(canvas);
+      document.getElementById("image-container").appendChild(canvas);
     }
   );
 }

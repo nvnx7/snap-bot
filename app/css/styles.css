@@ -12,21 +12,14 @@ header {
   text-align: center;
 }
 
-button {
-  width: 200px;
-  border: 2px solid black;
-  padding: 20px;
-  background: none;
-  background-color: black;
-  color: whitesmoke;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.3em;
-  transition-duration: 500ms;
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
-button:hover {
-  background-color: whitesmoke;
-  color: black;
+#download-btn {
+  background-color: #00acee;
+  font-weight: 700;
 }
