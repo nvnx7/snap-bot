@@ -24,7 +24,7 @@ function setTweetText(text) {
 }
 
 function setTweetHeader(profilePicUrl, author, username, isVerified = false) {
-  tweetWrapper.querySelector("#profile-pic").src = profilePicUrl;
+  setImageFromURL(profilePicUrl);
   tweetWrapper.querySelector("#author").innerHTML = author;
   tweetWrapper.querySelector("#username").innerHTML = `@${username}`;
 
@@ -58,7 +58,7 @@ function setTweetFooter(likeCount, timeString) {
   tweetWrapper.querySelector("#tweet-time").innerHTML = timeString;
 }
 
-function switchTheme(theme) {
+function setTheme(theme) {
   if (theme === "light") {
     tweetWrapper.classList.remove("dark");
     tweetWrapper.classList.add("light");
@@ -66,4 +66,17 @@ function switchTheme(theme) {
     tweetWrapper.classList.remove("light");
     tweetWrapper.classList.add("dark");
   }
+}
+
+function setImageFromURL(url) {
+  let img = tweetWrapper.querySelector("#profile-pic");
+  fetch(url)
+    .then((response) => response.blob())
+    .then((blob) => {
+      var reader = new FileReader();
+      reader.onload = function () {
+        img.src = this.result;
+      };
+      reader.readAsDataURL(blob);
+    });
 }

@@ -10,7 +10,7 @@ btn.addEventListener("click", () => {
 
 themeControl.addEventListener("click", () => {
   const theme = themeControl.querySelector(`input[name="theme"]:checked`).value;
-  switchTheme(theme);
+  setTheme(theme);
 });
 
 likeControl.addEventListener("click", () => {
