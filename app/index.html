@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <header>Snap Bot</header>
+    <header id="app-header">Snap Bot</header>
     <div id="target"></div>
     <div id="wrapper">
       <div id="tweet-wrapper" class="dark">
@@ -46,6 +46,7 @@
               <img src="img/twitter_logo.png" alt="twitter logo" />
             </div>
           </div>
+
           <div id="tweet-text">
             <p>
               Everyone you meet is fighting a battle you know nothing about.
@@ -54,6 +55,15 @@
               <br /><br />Always.
             </p>
           </div>
+
+          <div id="tweet-image-container">
+            <img
+              id="tweet-image"
+              src="https://pbs.twimg.com/media/EYphk3LXsAADPtK?format=jpg&name=900x900"
+              alt="tweet image"
+            />
+          </div>
+
           <div id="tweet-footer">
             <div id="heart-icon">
               <img id="heart-img" src="img/normal.png" alt="like icon" />
@@ -91,6 +101,20 @@
             <span>Like Tweet</span>
           </label>
         </div>
+
+        <div id="image-control" class="control-container">
+          <!-- <div class="control-label">LIKED</div> -->
+          <label for="image">
+            <input
+              type="checkbox"
+              id="image"
+              name="image"
+              value="image"
+              class="filled-in"
+            />
+            <span>Hide Tweet Image</span>
+          </label>
+        </div>
       </div>
 
       <a id="download-btn" class="waves-effect waves-light btn-large">
@@ -102,7 +126,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <!-- build:js js/main.min.js -->
     <script src="js/tweetPreview.js"></script>
-    <script src="js/embedTweet.js"></script>
+    <script src="js/captureTweet.js"></script>
     <script src="js/main.js"></script>
     <!-- endbuild -->
   </body>

@@ -93,6 +93,16 @@
   width: 100%;
 }
 
+#tweet-image-container {
+  margin-bottom: 6px;
+}
+
+#tweet-image {
+  width: 100%;
+  /* max-height: 400px; */
+  border-radius: 5px;
+}
+
 #tweet-footer {
   display: flex;
   flex-direction: row;

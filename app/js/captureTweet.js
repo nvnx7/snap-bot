@@ -7,8 +7,9 @@ const options = {
 };
 
 const shotOptions = {
-  allowTaint: false,
+  allowTaint: true,
   logging: true,
+  scrollY: 165,
 };
 
 function embedTweet(id) {
@@ -32,11 +33,29 @@ function downloadImage(uri, filename = "tweet.png") {
   }
 }
 
+function getOffset() {
+  const offset = [];
+  const viewportW = window.innerWidth;
+  const viewportH = window.innerHeight;
+  const headerH = document.getElementById("app-header").clientHeight;
+  const wrapper = document.getElementById("tweet-wrapper");
+
+  if (wrapper.clientWidth - viewportW <= 0) offset.push(wrapper.scrollLeft);
+  else offset.push(wrapper.clientWidth - viewportW);
+
+  if (wrapper.clientHeight + headerH - viewportH <= 0)
+    offset.push(wrapper.scrollTop);
+  else offset.push(wrapper.clientHeight + headerH - viewportH);
+
+  return offset;
+}
+
 function takeShot() {
+  window.scrollTo(0, 0);
   html2canvas(document.getElementById("tweet-wrapper"), shotOptions).then(
     (canvas) => {
-      // document.body.appendChild(canvas);
-      downloadImage(canvas.toDataURL());
+      document.body.appendChild(canvas);
+      // downloadImage(canvas.toDataURL());
     }
   );
 }

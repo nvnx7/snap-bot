@@ -2,6 +2,7 @@
 const btn = document.getElementById("download-btn");
 const themeControl = document.getElementById("theme-control");
 const likeControl = document.getElementById("like-control");
+const imageControl = document.getElementById("image-control");
 
 btn.addEventListener("click", () => {
   takeShot();
@@ -16,4 +17,9 @@ themeControl.addEventListener("click", () => {
 likeControl.addEventListener("click", () => {
   const checked = likeControl.querySelector(`input[name="like"]`).checked;
   setTweetLiked(checked);
+});
+
+imageControl.addEventListener("click", () => {
+  const checked = imageControl.querySelector(`input[name="image"]`).checked;
+  setHideTweetImage(checked);
 });

@@ -24,7 +24,7 @@ function setTweetText(text) {
 }
 
 function setTweetHeader(profilePicUrl, author, username, isVerified = false) {
-  setImageFromURL(profilePicUrl);
+  setImageFromURL(profilePicUrl, tweetWrapper.querySelector("#profile-pic"));
   tweetWrapper.querySelector("#author").innerHTML = author;
   tweetWrapper.querySelector("#username").innerHTML = `@${username}`;
 
@@ -35,6 +35,23 @@ function setTweetHeader(profilePicUrl, author, username, isVerified = false) {
   } else {
     tweetWrapper.querySelector("#verified-badge-container").innerHTML = "";
   }
+}
+
+function setTweetImage(imageUrl) {
+  if (imageUrl)
+    setImageFromURL(imageUrl, tweetWrapper.querySelector("#tweet-image"));
+}
+
+function setHideTweetImage(show) {
+  if (show)
+    tweetWrapper.querySelector("#tweet-image-container").style.display = "none";
+  else
+    tweetWrapper.querySelector("#tweet-image-container").style.display =
+      "block";
+}
+
+function disableImageControl() {
+  imageControl.querySelector(`input[name="image"]`).disabled = true;
 }
 
 function setTweetLiked(isLiked) {
@@ -68,14 +85,13 @@ function setTheme(theme) {
   }
 }
 
-function setImageFromURL(url) {
-  let img = tweetWrapper.querySelector("#profile-pic");
+function setImageFromURL(url, targetImgElement) {
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
       var reader = new FileReader();
       reader.onload = function () {
-        img.src = this.result;
+        targetImgElement.src = this.result;
       };
       reader.readAsDataURL(blob);
     });
