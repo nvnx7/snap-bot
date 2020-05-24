@@ -6,12 +6,6 @@ const options = {
   theme: "dark",
 };
 
-const shotOptions = {
-  allowTaint: true,
-  logging: true,
-  scrollY: 165,
-};
-
 function embedTweet(id) {
   twttr.widgets.createTweet(id, document.getElementById("target"), options);
 }
@@ -33,29 +27,36 @@ function downloadImage(uri, filename = "tweet.png") {
   }
 }
 
-function getOffset() {
-  const offset = [];
+function composeOptions(theme) {
+  const options = {};
+  options.allowTaint = true;
+  options.removeContainer = true;
+  options.backgroundColor = "red";
+  // options.scrollX = -9;
+
+  // options.backgroundColor = theme === "dark" ? "#000000" : "#ffffff";
+
   const viewportW = window.innerWidth;
   const viewportH = window.innerHeight;
   const headerH = document.getElementById("app-header").clientHeight;
   const wrapper = document.getElementById("tweet-wrapper");
 
-  if (wrapper.clientWidth - viewportW <= 0) offset.push(wrapper.scrollLeft);
-  else offset.push(wrapper.clientWidth - viewportW);
+  if (wrapper.clientWidth - viewportW > 0)
+    options.scrollX = -(wrapper.clientWidth - viewportW);
 
-  if (wrapper.clientHeight + headerH - viewportH <= 0)
-    offset.push(wrapper.scrollTop);
-  else offset.push(wrapper.clientHeight + headerH - viewportH);
+  if (wrapper.clientHeight + headerH - viewportH > 0)
+    options.scrollY = wrapper.clientHeight + headerH - viewportH;
 
-  return offset;
+  return options;
 }
 
 function takeShot() {
   window.scrollTo(0, 0);
-  html2canvas(document.getElementById("tweet-wrapper"), shotOptions).then(
-    (canvas) => {
-      document.body.appendChild(canvas);
-      // downloadImage(canvas.toDataURL());
-    }
-  );
+  html2canvas(
+    document.getElementById("tweet-wrapper"),
+    composeOptions("light")
+  ).then((canvas) => {
+    document.body.appendChild(canvas);
+    // downloadImage(canvas.toDataURL());
+  });
 }

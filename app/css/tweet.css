@@ -18,8 +18,8 @@
 
 #tweet-wrapper {
   width: 490px;
-  border: 1px solid #cccccc;
-  border-radius: 5px;
+  /* border: 1px solid #cccccc;
+  border-radius: 5px; */
   line-height: 1.4;
   font-size: 16px;
   font-weight: normal;
@@ -94,6 +94,10 @@
 }
 
 #tweet-image-container {
+  /* display: flex; */
+  height: fit-content;
+  /* align-self: center;
+  justify-self: center; */
   margin-bottom: 6px;
 }
 
