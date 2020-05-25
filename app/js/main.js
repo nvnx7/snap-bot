@@ -6,7 +6,6 @@ const imageControl = document.getElementById("image-control");
 
 btn.addEventListener("click", () => {
   takeShot();
-  // alert("LALALA22222");
 });
 
 themeControl.addEventListener("click", () => {
@@ -19,7 +18,9 @@ likeControl.addEventListener("click", () => {
   setTweetLiked(checked);
 });
 
-imageControl.addEventListener("click", () => {
+const hideImageHandler = () => {
   const checked = imageControl.querySelector(`input[name="image"]`).checked;
   setHideTweetImage(checked);
-});
+};
+
+imageControl.addEventListener("click", hideImageHandler);

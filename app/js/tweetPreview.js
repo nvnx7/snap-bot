@@ -1,22 +1,47 @@
 const tweetWrapper = document.getElementById("tweet-wrapper");
-
-const theme = {
-  dark: {
-    background: "#000000",
-    textColor: "#ffffff",
-  },
-  light: {
-    background: "#ffffff",
-    textColor: "#000000",
-  },
+const sample = {
+  author: "Wisdom Theory",
+  username: "wealth_theory",
+  verified: false,
+  profilePic:
+    "https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg",
+  tweetText: `Everyone you meet is fighting a #battle you know nothing about.<br /><br />Be #kind.<br /><br />Always. @random`,
+  tweetImage: "",
+  likeCount: 234,
+  timeString: "3:04 AM - May 20, 2020",
+  tokens: ["#battle", "#kind", "@random"],
 };
 
-function processText(text) {
-  return text;
+function setTweet(tweet) {
+  setTweetText(tweet.tweetText, tweet.tokens);
+  setTweetHeader(
+    tweet.profilePic,
+    tweet.author,
+    tweet.username,
+    tweet.verified
+  );
+  setTweetFooter(tweet.likeCount, tweet.timeString);
+  if (tweet.tweetImage) setTweetImage(tweet.tweetImage);
+  else {
+    disableImageControl();
+    setHideTweetImage(true);
+  }
 }
 
-function setTweetText(text) {
-  const processedText = processText(text);
+function processText(text, tokens) {
+  let processedText = text;
+  for (let token of tokens) {
+    processedText = processedText.replace(
+      token,
+      `<span class="special-text">${token}</span>`
+    );
+  }
+
+  return processedText;
+}
+
+function setTweetText(text, tokens) {
+  const processedText = processText(text, tokens);
   // TODO May need to wrap text with <p>....</p>
   tweetWrapper.querySelector(
     "#tweet-text"
@@ -51,6 +76,7 @@ function setHideTweetImage(show) {
 }
 
 function disableImageControl() {
+  imageControl.removeEventListener("click", hideImageHandler);
   imageControl.querySelector(`input[name="image"]`).disabled = true;
 }
 

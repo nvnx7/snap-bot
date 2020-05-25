@@ -45,10 +45,6 @@
   margin-right: 9px;
 }
 
-#sub-header {
-  /*   background: green; */
-}
-
 #author {
   max-width: 100%;
   font-weight: 700;
@@ -91,6 +87,10 @@
 
 #twitter-icon > img {
   width: 100%;
+}
+
+.special-text {
+  color: #00acee;
 }
 
 #tweet-image-container {
