@@ -10,6 +10,20 @@ function embedTweet(id) {
   twttr.widgets.createTweet(id, document.getElementById("target"), options);
 }
 
+function fetchTweet(tweetId) {
+  const endpoint = `/${tweetId}`;
+  fetch(endpoint)
+    .then((response) => {
+      return response.text(); //.json();
+    })
+    .then((data) => {
+      console.log(`Data retrieved ${data}`);
+    })
+    .catch((err) => {
+      console.log(`Error fetching data: ${err}`);
+    });
+}
+
 function downloadImage(uri, filename = "tweet.png") {
   const link = document.createElement("a");
 

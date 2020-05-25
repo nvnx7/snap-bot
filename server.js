@@ -19,13 +19,41 @@ const typeMap = {
   ".doc": "application/msword",
 };
 
+const sample = {
+  author: "Wisdom Theory",
+  username: "wealth_theory",
+  verified: false,
+  profilePic:
+    "https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg",
+  tweetText: `Everyone you meet is fighting a #battle you know nothing about.<br /><br />Be #kind.<br /><br />Always. @random`,
+  tweetImage: "",
+  likeCount: 234,
+  timeString: "3:04 AM - May 20, 2020",
+  tokens: ["#battle", "#kind", "@random"],
+};
+
+const sample2 = {
+  author: "Wisdom Theory",
+  username: "wealth_theory",
+  verified: false,
+};
+
+const reg = /^\d+$/;
+
 const baseDir = "./dist";
 
 function handleRequests(req, res) {
   console.log(`${req.method} ${req.url}`);
 
-  const parsedUrl = url.parse(req.url);
-  let filePath = baseDir + parsedUrl.pathname;
+  const pathname = url.parse(req.url).pathname;
+  if (reg.test(pathname.slice(1))) {
+    console.log(`API Call received ${pathname}`);
+    res.writeHead(200, { "Content-Type": typeMap[".json"] });
+    res.end(JSON.stringify(sample));
+    return;
+  }
+
+  let filePath = baseDir + pathname;
   if (filePath == `${baseDir}/`) filePath = `${baseDir}/index.html`;
 
   const extname = path.extname(filePath);
@@ -34,7 +62,7 @@ function handleRequests(req, res) {
   fs.exists(filePath, (exist) => {
     if (!exist) {
       res.statusCode = 404;
-      res.end(`File ${fileName} not found!`);
+      res.end(`File ${filePath} not found!`);
       return;
     }
 
