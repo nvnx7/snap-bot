@@ -2,22 +2,9 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const url = require("url");
-const Twit = require("twit");
 
-const typeMap = {
-  ".ico": "image/x-icon",
-  ".html": "text/html",
-  ".js": "text/javascript",
-  ".json": "application/json",
-  ".css": "text/css",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".wav": "audio/wav",
-  ".mp3": "audio/mpeg",
-  ".svg": "image/svg+xml",
-  ".pdf": "application/pdf",
-  ".doc": "application/msword",
-};
+const typeMap = require("./model/constants.js");
+const requestTweet = require("./controller/tweet.js");
 
 const sample = {
   author: "Wisdom Theory",
@@ -47,6 +34,7 @@ function handleRequests(req, res) {
 
   const pathname = url.parse(req.url).pathname;
   if (reg.test(pathname.slice(1))) {
+    requestTweet("1262859072459726849");
     console.log(`API Call received ${pathname}`);
     res.writeHead(200, { "Content-Type": typeMap[".json"] });
     res.end(JSON.stringify(sample));
