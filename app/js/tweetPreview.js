@@ -1,16 +1,16 @@
 const tweetWrapper = document.getElementById("tweet-wrapper");
-const sample = {
-  author: "Wisdom Theory",
-  username: "wealth_theory",
-  verified: false,
-  profilePic:
-    "https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg",
-  tweetText: `Everyone you meet is fighting a #battle you know nothing about.<br /><br />Be #kind.<br /><br />Always. @random`,
-  tweetImage: "",
-  likeCount: 234,
-  timeString: "3:04 AM - May 20, 2020",
-  tokens: ["#battle", "#kind", "@random"],
-};
+// const sample = {
+//   author: "Wisdom Theory",
+//   username: "wealth_theory",
+//   verified: false,
+//   profilePic:
+//     "https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg",
+//   tweetText: `Everyone you meet is fighting a #battle you know nothing about.<br /><br />Be #kind.<br /><br />Always. @random`,
+//   tweetImage: "",
+//   likeCount: 234,
+//   timeString: "3:04 AM - May 20, 2020",
+//   tokens: ["#battle", "#kind", "@random"],
+// };
 
 function setTweet(tweet) {
   setTweetText(tweet.tweetText, tweet.tokens);
@@ -29,7 +29,7 @@ function setTweet(tweet) {
 }
 
 function processText(text, tokens) {
-  let processedText = text;
+  let processedText = text.replace("\n", "<br />");
   for (let token of tokens) {
     processedText = processedText.replace(
       token,

@@ -1,3 +1,4 @@
+const express = require("express");
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -34,7 +35,7 @@ function handleRequests(req, res) {
 
   const pathname = url.parse(req.url).pathname;
   if (reg.test(pathname.slice(1))) {
-    requestTweet("1262859072459726849");
+    requestTweet(pathname.slice(1));
     console.log(`API Call received ${pathname}`);
     res.writeHead(200, { "Content-Type": typeMap[".json"] });
     res.end(JSON.stringify(sample));

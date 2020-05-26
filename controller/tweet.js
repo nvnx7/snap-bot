@@ -4,7 +4,7 @@ const Twit = require("twit");
 const T = new Twit(config);
 
 function requestTweet(tweetId) {
-  T.get("search/tweets", { id: tweetId }, (err, data, response) => {
+  T.get("statuses/show/:id", { id: tweetId }, (err, data, response) => {
     console.log(`Tweet Data: ${JSON.stringify(data)}`);
   });
 }
