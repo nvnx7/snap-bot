@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/theNvN/snap-bot#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "twit": "^2.2.11"
   },
   "devDependencies": {

@@ -11,8 +11,8 @@ const browserSync = require("browser-sync").create();
 
 function scripts() {
   return gulp
-    .src("app/js/*.js")
-    .pipe(browserSync.stream())
+    .src("src/js/*.js")
+
     .pipe(concat("concat.js"))
     .pipe(
       babel({
@@ -21,40 +21,41 @@ function scripts() {
     )
     .pipe(uglify())
     .pipe(rename("main.min.js"))
-    .pipe(gulp.dest("dist/js"));
+    .pipe(gulp.dest("public/includes"))
+    .pipe(browserSync.stream());
 }
 
 function styles() {
   return gulp
-    .src("app/css/*.css")
+    .src("src/css/*.css")
     .pipe(autoprefix())
-    .pipe(browserSync.stream())
     .pipe(concat("concat.css"))
     .pipe(cleanCss())
     .pipe(rename("styles.min.css"))
-    .pipe(gulp.dest("dist/css"));
+    .pipe(gulp.dest("public/includes"))
+    .pipe(browserSync.stream());
 }
 
 function copy() {
   return gulp
-    .src("app/*.html")
-    .pipe(browserSync.stream())
+    .src("src/*.html")
     .pipe(useref({ noAssets: true }))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest("view"))
+    .pipe(browserSync.stream());
 }
 
 function images() {
   return gulp
-    .src("app/img/*.+(png|jpg|gif|svg)")
-    .pipe(browserSync.stream())
+    .src("src/img/*.+(png|jpg|gif|svg)")
     .pipe(imagemin())
-    .pipe(gulp.dest("dist/img"));
+    .pipe(gulp.dest("public/img"))
+    .pipe(browserSync.stream());
 }
 
 function browserSyncInit() {
   browserSync.init({
     server: {
-      baseDir: "app",
+      baseDir: "view",
       index: "index.html",
     },
   });
@@ -62,10 +63,10 @@ function browserSyncInit() {
 
 function watch() {
   browserSyncInit();
-  gulp.watch("app/css/*.css", styles);
-  gulp.watch("app/js/*.js", scripts); //.on("change", browserSync.reload);
-  gulp.watch("app/*.html", copy); //.on("change", browserSync.reload);
-  gulp.watch("app/img/*.+(png|jpg|gif|svg)", images); //.on("change", browserSync.reload);
+  gulp.watch("src/css/*.css", styles);
+  gulp.watch("src/js/*.js", scripts); //.on("change", browserSync.reload);
+  gulp.watch("src/*.html", copy); //.on("change", browserSync.reload);
+  gulp.watch("src/img/*.+(png|jpg|gif|svg)", images); //.on("change", browserSync.reload);
 }
 
 exports.watch = gulp.series(

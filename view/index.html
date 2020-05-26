@@ -4,10 +4,7 @@
     <title>
       Tweet Template
     </title>
-    <!-- build:css css/styles.min.css -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="css/tweet.css" />
-    <!-- endbuild -->
+    <link rel="stylesheet" href="../public/includes/styles.min.css">
     <!-- <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
@@ -37,13 +34,13 @@
                   Wisdom Theory
                 </div>
                 <div id="verified-badge-container">
-                  <img src="img/verified.png" alt="verified badge" />
+                  <img src="../public/img/verified.png" alt="verified badge" />
                 </div>
               </div>
               <div id="username">@wealth_theory</div>
             </div>
             <div id="twitter-icon">
-              <img src="img/twitter_logo.png" alt="twitter logo" />
+              <img src="../public/img/twitter_logo.png" alt="twitter logo" />
             </div>
           </div>
 
@@ -66,7 +63,11 @@
 
           <div id="tweet-footer">
             <div id="heart-icon">
-              <img id="heart-img" src="img/normal.png" alt="like icon" />
+              <img
+                id="heart-img"
+                src="../public/img/normal.png"
+                alt="like icon"
+              />
             </div>
             <div id="like-count">234</div>
             <div id="tweet-time">3:04 AM - May 20, 2020</div>
@@ -124,10 +125,6 @@
 
     <script src="https://platform.twitter.com/widgets.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <!-- build:js js/main.min.js -->
-    <script src="js/tweetPreview.js"></script>
-    <script src="js/captureTweet.js"></script>
-    <script src="js/main.js"></script>
-    <!-- endbuild -->
+    <script src="../public/includes/main.min.js"></script>
   </body>
 </html>

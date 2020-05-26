@@ -1,16 +1,4 @@
 const tweetWrapper = document.getElementById("tweet-wrapper");
-// const sample = {
-//   author: "Wisdom Theory",
-//   username: "wealth_theory",
-//   verified: false,
-//   profilePic:
-//     "https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg",
-//   tweetText: `Everyone you meet is fighting a #battle you know nothing about.<br /><br />Be #kind.<br /><br />Always. @random`,
-//   tweetImage: "",
-//   likeCount: 234,
-//   timeString: "3:04 AM - May 20, 2020",
-//   tokens: ["#battle", "#kind", "@random"],
-// };
 
 function setTweet(tweet) {
   setTweetText(tweet.tweetText, tweet.tokens);
@@ -56,7 +44,7 @@ function setTweetHeader(profilePicUrl, author, username, isVerified = false) {
   if (isVerified) {
     tweetWrapper.querySelector(
       "#verified-badge-container"
-    ).innerHTML = `<img src="img/verified.png" alt="verified badge" />`;
+    ).innerHTML = `<img src="../public/img/verified.png" alt="verified badge" />`;
   } else {
     tweetWrapper.querySelector("#verified-badge-container").innerHTML = "";
   }
@@ -85,10 +73,10 @@ function setTweetLiked(isLiked) {
   let textColor;
 
   if (isLiked) {
-    imgSrc = "img/liked.png";
+    imgSrc = "../public/img/liked.png";
     textColor = "#ff0000";
   } else {
-    imgSrc = "img/normal.png";
+    imgSrc = "../public/img/normal.png";
     textColor = "#8899a6";
   }
 
