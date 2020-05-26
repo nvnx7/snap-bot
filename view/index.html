@@ -1,130 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      Tweet Template
-    </title>
-    <link rel="stylesheet" href="../public/includes/styles.min.css">
-    <!-- <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    /> -->
+    <title>Snap Bot</title>
+    <link rel="stylesheet" href="../public/includes/home.min.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
   </head>
-
   <body>
     <header id="app-header">Snap Bot</header>
-    <div id="target"></div>
     <div id="wrapper">
-      <div id="tweet-wrapper" class="dark">
-        <div id="tweet-container">
-          <div id="tweet-header">
-            <img
-              id="profile-pic"
-              src="https://pbs.twimg.com/profile_images/1242963480707248128/ZCzQHDaw_normal.jpg"
-              alt="avatar"
-              crossorigin="anonymous"
-            />
-            <div id="sub-header">
-              <div id="author-name-container">
-                <div id="author">
-                  Wisdom Theory
-                </div>
-                <div id="verified-badge-container">
-                  <img src="../public/img/verified.png" alt="verified badge" />
-                </div>
-              </div>
-              <div id="username">@wealth_theory</div>
-            </div>
-            <div id="twitter-icon">
-              <img src="../public/img/twitter_logo.png" alt="twitter logo" />
-            </div>
-          </div>
-
-          <div id="tweet-text">
-            <p>
-              Everyone you meet is fighting a battle you know nothing about.
-              <br /><br />
-              Be kind.
-              <br /><br />Always.
-            </p>
-          </div>
-
-          <div id="tweet-image-container">
-            <img
-              id="tweet-image"
-              src="https://pbs.twimg.com/media/EYphk3LXsAADPtK?format=jpg&name=900x900"
-              alt="tweet image"
-            />
-          </div>
-
-          <div id="tweet-footer">
-            <div id="heart-icon">
-              <img
-                id="heart-img"
-                src="../public/img/normal.png"
-                alt="like icon"
-              />
-            </div>
-            <div id="like-count">234</div>
-            <div id="tweet-time">3:04 AM - May 20, 2020</div>
-          </div>
-        </div>
-      </div>
-      <div id="customization-wrapper">
-        <!-- <div id="customization-label" class="label">Customize Further</div> -->
-
-        <div id="theme-control" class="control-container">
-          <!-- <div class="control-label">THEME</div> -->
-          <label for="light">
-            <input type="radio" id="light" name="theme" value="light" />
-            <span>Light</span>
-          </label>
-          <label for="dark">
-            <input type="radio" id="dark" name="theme" value="dark" checked />
-            <span>Dark</span>
-          </label>
-        </div>
-
-        <div id="like-control" class="control-container">
-          <!-- <div class="control-label">LIKED</div> -->
-          <label for="like">
-            <input
-              type="checkbox"
-              id="like"
-              name="like"
-              value="like"
-              class="filled-in"
-            />
-            <span>Like Tweet</span>
-          </label>
-        </div>
-
-        <div id="image-control" class="control-container">
-          <!-- <div class="control-label">LIKED</div> -->
-          <label for="image">
-            <input
-              type="checkbox"
-              id="image"
-              name="image"
-              value="image"
-              class="filled-in"
-            />
-            <span>Hide Tweet Image</span>
-          </label>
-        </div>
-      </div>
-
-      <a id="download-btn" class="waves-effect waves-light btn-large">
-        Download
-      </a>
+      <form action="">
+        <input
+          id="tweet-link"
+          type="text"
+          name="tweet"
+          placeholder="Tweet Link"
+        />
+        <div id="error-message">Something went wrong!</div>
+        <button
+          id="tweet-search-btn"
+          class="btn-large waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          SEARCH
+        </button>
+      </form>
     </div>
-
-    <script src="https://platform.twitter.com/widgets.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="../public/includes/main.min.js"></script>
   </body>
 </html>

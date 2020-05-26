@@ -7,12 +7,12 @@ const autoprefix = require("gulp-autoprefixer");
 const cleanCss = require("gulp-clean-css");
 const useref = require("gulp-useref");
 const imagemin = require("gulp-imagemin");
+const mergeStream = require("merge-stream");
 const browserSync = require("browser-sync").create();
 
 function scripts() {
-  return gulp
-    .src("src/js/*.js")
-
+  const homePageScripts = gulp
+    .src("src/js/home/main.js", { base: "src/js/home" })
     .pipe(concat("concat.js"))
     .pipe(
       babel({
@@ -20,20 +20,60 @@ function scripts() {
       })
     )
     .pipe(uglify())
-    .pipe(rename("main.min.js"))
+    .pipe(rename("home.min.js"))
     .pipe(gulp.dest("public/includes"))
     .pipe(browserSync.stream());
+
+  const tweetPageScripts = gulp
+    .src(
+      [
+        "src/js/tweet/captureTweet.js",
+        "src/js/tweet/main.js",
+        "src/js/tweet/tweetPreview.js",
+      ],
+      { base: "src/js/tweet" }
+    )
+    .pipe(concat("concat.js"))
+    .pipe(
+      babel({
+        presets: ["@babel/env"],
+      })
+    )
+    .pipe(uglify())
+    .pipe(rename("tweet.min.js"))
+    .pipe(gulp.dest("public/includes"))
+    .pipe(browserSync.stream());
+
+  return mergeStream(homePageScripts, tweetPageScripts);
 }
 
 function styles() {
-  return gulp
-    .src("src/css/*.css")
+  const homePageStyles = gulp
+    .src(["src/css/home/styles.css", "src/css/common.css"], { base: "src/css" })
     .pipe(autoprefix())
     .pipe(concat("concat.css"))
     .pipe(cleanCss())
-    .pipe(rename("styles.min.css"))
+    .pipe(rename("home.min.css"))
     .pipe(gulp.dest("public/includes"))
     .pipe(browserSync.stream());
+
+  const tweetPageStyles = gulp
+    .src(
+      [
+        "src/css/tweet/styles.css",
+        "src/css/tweet/preview.css",
+        "src/css/common.css",
+      ],
+      { base: "src/css" }
+    )
+    .pipe(autoprefix())
+    .pipe(concat("concat.css"))
+    .pipe(cleanCss())
+    .pipe(rename("tweet.min.css"))
+    .pipe(gulp.dest("public/includes"))
+    .pipe(browserSync.stream());
+
+  return mergeStream(homePageStyles, tweetPageStyles);
 }
 
 function copy() {

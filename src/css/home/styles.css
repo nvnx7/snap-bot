@@ -1,0 +1,36 @@
+#wrapper {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 136px 0px;
+  margin-top: 10px;
+}
+
+form {
+  width: 500px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: yellowgreen; */
+}
+
+input {
+  text-align: center;
+  border-color: #00acee;
+}
+
+#tweet-search-btn {
+  background-color: #00acee;
+}
+
+#error-message {
+  display: none;
+  font-size: 14px;
+  color: red;
+  justify-self: flex-start;
+}
