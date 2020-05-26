@@ -8,6 +8,8 @@ const url = require("url");
 const typeMap = require("./model/constants.js");
 const requestTweet = require("./controller/tweet.js");
 
+const app = express();
+
 const sample = {
   author: "Wisdom Theory",
   username: "wealth_theory",
@@ -28,48 +30,69 @@ const sample2 = {
 };
 
 const reg = /^\d+$/;
+// const baseDir = "./dist";
+app.use("/public", express.static(`${__dirname}/public`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+});
 
-const baseDir = "./dist";
+app.get("/", (req, res) => {
+  res.sendFile(`${__dirname}/views/index.html`);
+});
 
-function handleRequests(req, res) {
-  console.log(`${req.method} ${req.url}`);
-
-  const pathname = url.parse(req.url).pathname;
-  if (reg.test(pathname.slice(1))) {
-    requestTweet(pathname.slice(1));
-    console.log(`API Call received ${pathname}`);
-    res.writeHead(200, { "Content-Type": typeMap[".json"] });
-    res.end(JSON.stringify(sample));
-    return;
+app.get("/:id", (req, res) => {
+  if (!reg.test(req.params.id)) {
+    res.status(404).type("text").send(`Invalid tweet id: ${req.params.id}`);
   }
 
-  let filePath = baseDir + pathname;
-  if (filePath == `${baseDir}/`) filePath = `${baseDir}/index.html`;
+  res.sendFile(`${__dirname}/views/tweet.html`);
+});
 
-  const extname = path.extname(filePath);
-  const contentType = typeMap[extname];
+const listener = app.listen(8080, () => {
+  console.log(`Server started at ${listener.address().port}`);
+});
 
-  fs.exists(filePath, (exist) => {
-    if (!exist) {
-      res.statusCode = 404;
-      res.end(`File ${filePath} not found!`);
-      return;
-    }
+// function handleRequests(req, res) {
+//   console.log(`${req.method} ${req.url}`);
 
-    fs.readFile(filePath, function (err, data) {
-      if (err) {
-        if (err) {
-          res.statusCode = 500;
-          res.end(`Error getting file: ${err}.`);
-        }
-      } else {
-        res.writeHead(200, { "Content-Type": contentType });
-        res.end(data);
-      }
-    });
-  });
-}
+//   const pathname = url.parse(req.url).pathname;
+//   if (reg.test(pathname.slice(1))) {
+//     requestTweet(pathname.slice(1));
+//     console.log(`API Call received ${pathname}`);
+//     res.writeHead(200, { "Content-Type": typeMap[".json"] });
+//     res.end(JSON.stringify(sample));
+//     return;
+//   }
 
-http.createServer(handleRequests).listen(8080);
+//   let filePath = baseDir + pathname;
+//   if (filePath == `${baseDir}/`) filePath = `${baseDir}/index.html`;
 
-console.log("Server started");
+//   const extname = path.extname(filePath);
+//   const contentType = typeMap[extname];
+
+//   fs.exists(filePath, (exist) => {
+//     if (!exist) {
+//       res.statusCode = 404;
+//       res.end(`File ${filePath} not found!`);
+//       return;
+//     }
+
+//     fs.readFile(filePath, function (err, data) {
+//       if (err) {
+//         if (err) {
+//           res.statusCode = 500;
+//           res.end(`Error getting file: ${err}.`);
+//         }
+//       } else {
+//         res.writeHead(200, { "Content-Type": contentType });
+//         res.end(data);
+//       }
+//     });
+//   });
+// }
+
+// http.createServer(handleRequests).listen(8080);
+
+// console.log("Server started");
