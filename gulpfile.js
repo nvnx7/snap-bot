@@ -12,7 +12,9 @@ const browserSync = require("browser-sync").create();
 
 function scripts() {
   const homePageScripts = gulp
-    .src("src/js/home/main.js", { base: "src/js/home" })
+    .src(["src/js/home/main.js", "src/js/home/searchBox.js"], {
+      base: "src/js/home",
+    })
     .pipe(concat("concat.js"))
     .pipe(
       babel({
@@ -103,8 +105,8 @@ function browserSyncInit() {
 
 function watch() {
   browserSyncInit();
-  gulp.watch("src/css/*.css", styles);
-  gulp.watch("src/js/*.js", scripts); //.on("change", browserSync.reload);
+  gulp.watch("src/css/**/*.css", styles);
+  gulp.watch("src/js/**/*.js", scripts); //.on("change", browserSync.reload);
   gulp.watch("src/*.html", copy); //.on("change", browserSync.reload);
   gulp.watch("src/img/*.+(png|jpg|gif|svg)", images); //.on("change", browserSync.reload);
 }

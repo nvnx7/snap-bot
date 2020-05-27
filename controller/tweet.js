@@ -3,10 +3,8 @@ const Twit = require("twit");
 
 const T = new Twit(config);
 
-function requestTweet(tweetId) {
-  T.get("statuses/show/:id", { id: tweetId }, (err, data, response) => {
-    console.log(`Tweet Data: ${JSON.stringify(data)}`);
-  });
+function requestTweet(tweetId, callback) {
+  T.get("statuses/show/:id", { id: tweetId }, callback);
 }
 
 module.exports = requestTweet;

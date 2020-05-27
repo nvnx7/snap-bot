@@ -14,11 +14,11 @@
   <body>
     <header id="app-header">Snap Bot</header>
     <div id="wrapper">
-      <form action="">
+      <form action="/tweet" method="POST">
         <input
           id="tweet-link"
           type="text"
-          name="tweet"
+          name="tweet-url"
           placeholder="Tweet Link"
         />
         <div id="error-message">Something went wrong!</div>
@@ -32,5 +32,9 @@
         </button>
       </form>
     </div>
+    <!-- build:js ../public/includes/home.min.js -->
+    <script src="js/home/main.js"></script>
+    <script src="js/home/searchBox.js"></script>
+    <!-- endbuild -->
   </body>
 </html>

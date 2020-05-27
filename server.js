@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -30,16 +31,32 @@ const sample2 = {
 };
 
 const reg = /^\d+$/;
-// const baseDir = "./dist";
-app.use("/public", express.static(`${__dirname}/public`));
-app.use(bodyParser.json());
+app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
+  next();
 });
 
+app.use("/public", express.static(`${__dirname}/public`));
+
 app.get("/", (req, res) => {
-  res.sendFile(`${__dirname}/views/index.html`);
+  res.sendFile(`${__dirname}/view/index.html`);
+});
+
+app.post("/tweet", (req, res) => {
+  console.log(`Req Body at server: ${JSON.stringify(req.body)}`);
+  const tweetId = url.parse(req.body.tweetUrl).pathname.split("/").slice(-1)[0];
+  console.log(`Id: ${tweetId}`);
+  if (!reg.test(tweetId))
+    res.status(404).type("text").send(`Invalid tweet id: ${tweetId}`);
+
+  requestTweet(tweetId, (err, data, response) => {
+    res.status(200).json({ tweet: data });
+  });
 });
 
 app.get("/:id", (req, res) => {
