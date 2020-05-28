@@ -12,7 +12,7 @@ const browserSync = require("browser-sync").create();
 
 function scripts() {
   const homePageScripts = gulp
-    .src(["src/js/home/main.js", "src/js/home/searchBox.js"], {
+    .src(["src/js/home/main.js", "src/js/home/search.js"], {
       base: "src/js/home",
     })
     .pipe(concat("concat.js"))
