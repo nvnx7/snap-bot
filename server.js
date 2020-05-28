@@ -7,7 +7,7 @@ const path = require("path");
 const url = require("url");
 
 const typeMap = require("./model/constants.js");
-const requestTweet = require("./controller/tweet.js");
+const { requestTweet, extractTweet } = require("./controller/tweet.js");
 
 const app = express();
 
@@ -48,68 +48,36 @@ app.get("/", (req, res) => {
 });
 
 app.post("/tweet", (req, res) => {
-  console.log(`Req Body at server: ${JSON.stringify(req.body)}`);
+  // console.log(`Req Body at server: ${JSON.stringify(req.body)}`);
   const tweetId = url.parse(req.body.tweetUrl).pathname.split("/").slice(-1)[0];
-  console.log(`Id: ${tweetId}`);
+  // console.log(`Id: ${tweetId}`);
   if (!reg.test(tweetId))
     res.status(404).type("text").send(`Invalid tweet id: ${tweetId}`);
 
   requestTweet(tweetId, (err, data, response) => {
-    res.status(200).json({ tweet: data });
+    // console.log(`Err: ${JSON.stringify(err)}`);
+    // console.log(`Data: ${JSON.stringify(data)}`);
+    // console.log(`Response: ${JSON.stringify(response)}`);
+
+    if (err) {
+      res.statusMessage = err.message;
+      res.status(404).end();
+    } else {
+      const tweetData = extractTweet(data);
+      console.log(`Tweet Data: ${JSON.stringify(tweetData)}`);
+      res.status(200).json(tweetData);
+    }
   });
 });
 
-app.get("/:id", (req, res) => {
+app.get("/tweet/:id", (req, res) => {
   if (!reg.test(req.params.id)) {
     res.status(404).type("text").send(`Invalid tweet id: ${req.params.id}`);
   }
 
-  res.sendFile(`${__dirname}/views/tweet.html`);
+  res.sendFile(`${__dirname}/view/tweet.html`);
 });
 
 const listener = app.listen(8080, () => {
   console.log(`Server started at ${listener.address().port}`);
 });
-
-// function handleRequests(req, res) {
-//   console.log(`${req.method} ${req.url}`);
-
-//   const pathname = url.parse(req.url).pathname;
-//   if (reg.test(pathname.slice(1))) {
-//     requestTweet(pathname.slice(1));
-//     console.log(`API Call received ${pathname}`);
-//     res.writeHead(200, { "Content-Type": typeMap[".json"] });
-//     res.end(JSON.stringify(sample));
-//     return;
-//   }
-
-//   let filePath = baseDir + pathname;
-//   if (filePath == `${baseDir}/`) filePath = `${baseDir}/index.html`;
-
-//   const extname = path.extname(filePath);
-//   const contentType = typeMap[extname];
-
-//   fs.exists(filePath, (exist) => {
-//     if (!exist) {
-//       res.statusCode = 404;
-//       res.end(`File ${filePath} not found!`);
-//       return;
-//     }
-
-//     fs.readFile(filePath, function (err, data) {
-//       if (err) {
-//         if (err) {
-//           res.statusCode = 500;
-//           res.end(`Error getting file: ${err}.`);
-//         }
-//       } else {
-//         res.writeHead(200, { "Content-Type": contentType });
-//         res.end(data);
-//       }
-//     });
-//   });
-// }
-
-// http.createServer(handleRequests).listen(8080);
-
-// console.log("Server started");
