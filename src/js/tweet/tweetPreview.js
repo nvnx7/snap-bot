@@ -1,5 +1,3 @@
-const tweetWrapper = document.getElementById("tweet-wrapper");
-
 function setTweet(tweet) {
   setTweetText(tweet.tweetText, tweet.tokens);
   setTweetHeader(
@@ -8,8 +6,8 @@ function setTweet(tweet) {
     tweet.username,
     tweet.verified
   );
-  setTweetFooter(tweet.likeCount, tweet.timeString);
-  if (tweet.tweetImage) setTweetImage(tweet.tweetImage);
+  setTweetFooter(tweet.likeCount, tweet.createdAt);
+  if (tweet.media) setTweetImage(tweet.media[0]);
   else {
     disableImageControl();
     setHideTweetImage(true);
@@ -17,7 +15,7 @@ function setTweet(tweet) {
 }
 
 function processText(text, tokens) {
-  let processedText = text.replace("\n", "<br />");
+  let processedText = text.replace(/\n/g, "<br />");
   for (let token of tokens) {
     processedText = processedText.replace(
       token,
