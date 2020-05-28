@@ -10,14 +10,15 @@ function embedTweet(id) {
   twttr.widgets.createTweet(id, document.getElementById("target"), options);
 }
 
-function fetchTweet(tweetId) {
-  const endpoint = `/${tweetId}`;
+function fetchTweet(tweetId, callback) {
+  const endpoint = `/tweet/${tweetId}`;
   fetch(endpoint)
     .then((response) => {
-      return response.text(); //.json();
+      return response.json(); //.json();
     })
-    .then((data) => {
-      console.log(`Data retrieved ${data}`);
+    .then((tweetData) => {
+      console.log(`Data retrieved ${tweetData}`);
+      callback(tweetData);
     })
     .catch((err) => {
       console.log(`Error fetching data: ${err}`);
