@@ -24,6 +24,12 @@ input {
   border-color: #00acee;
 }
 
+#loading-indicator-container {
+  display: none;
+  width: 200px;
+  text-align: center;
+}
+
 #tweet-search-btn {
   background-color: #00acee;
 }
