@@ -82,9 +82,11 @@ function setTweetLiked(isLiked) {
   tweetWrapper.querySelector("#like-count").style.color = textColor;
 }
 
-function setTweetFooter(likeCount, timeString) {
+function setTweetFooter(likeCount, utcString) {
   tweetWrapper.querySelector("#like-count").innerHTML = likeCount;
-  tweetWrapper.querySelector("#tweet-time").innerHTML = timeString;
+  tweetWrapper.querySelector("#tweet-time").innerHTML = getLocaleDateString(
+    utcString
+  );
 }
 
 function setTheme(theme) {
@@ -101,10 +103,19 @@ function setImageFromURL(url, targetImgElement) {
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = function () {
         targetImgElement.src = this.result;
       };
       reader.readAsDataURL(blob);
     });
+}
+
+function getLocaleDateString(utcString) {
+  const date = new Date(utcString);
+  const localeTime = date.toLocaleTimeString("default", { timeStyle: "short" });
+  const localeDate = date.toLocaleDateString("default", {
+    dateStyle: "medium",
+  });
+  return `${localeTime} - ${localeDate}`;
 }
