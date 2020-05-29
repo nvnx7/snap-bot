@@ -14,7 +14,7 @@ function fetchTweet(tweetId, callback) {
   const endpoint = `/tweet/${tweetId}`;
   fetch(endpoint)
     .then((response) => {
-      return response.json(); //.json();
+      return response.json();
     })
     .then((tweetData) => {
       console.log(`Data retrieved ${tweetData}`);

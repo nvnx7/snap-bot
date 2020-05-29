@@ -28,7 +28,6 @@ function processText(text, tokens) {
 
 function setTweetText(text, tokens) {
   const processedText = processText(text, tokens);
-  // TODO May need to wrap text with <p>....</p>
   tweetWrapper.querySelector(
     "#tweet-text"
   ).innerHTML = `<p>${processedText}</p>`;
