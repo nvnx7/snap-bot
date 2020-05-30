@@ -11,17 +11,32 @@ function embedTweet(id) {
 }
 
 function fetchTweet(tweetId, callback) {
-  const endpoint = `/tweet/${tweetId}`;
-  fetch(endpoint)
+  const data = new URLSearchParams();
+  data.append("tweetUrl", `/tweet/${tweetId}`);
+
+  // const endpoint = `/tweet`;
+  fetch("/tweet", {
+    method: "POST",
+    body: data,
+  })
     .then((response) => {
+      if (!response.ok) {
+        const err = Error();
+        err.name = "404";
+        err.message = response.statusText;
+        throw err;
+      }
       return response.json();
     })
     .then((tweetData) => {
-      console.log(`Data retrieved ${tweetData}`);
+      // console.log(`Data retrieved ${tweetData}`);
       callback(tweetData);
     })
     .catch((err) => {
+      setTweetLoading(false);
       console.log(`Error fetching data: ${err}`);
+      if (err.name == "404") showErrorMessage(err.message);
+      else showErrorMessage("Network error!");
     });
 }
 

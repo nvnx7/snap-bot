@@ -17,12 +17,21 @@
 }
 
 #tweet-wrapper {
+  display: none;
   width: 490px;
-  /* border: 1px solid #cccccc;
-  border-radius: 5px; */
   line-height: 1.4;
   font-size: 16px;
   font-weight: normal;
+}
+
+#loading-indicator {
+  margin: 28px;
+}
+
+#error-message {
+  margin: 28px;
+  font-size: 14px;
+  color: red;
 }
 
 #tweet-container {
@@ -90,7 +99,7 @@
 }
 
 .special-text {
-  color: #00acee;
+  color: var(--twitter-blue);
 }
 
 #tweet-image-container {
