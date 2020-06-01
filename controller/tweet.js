@@ -3,6 +3,15 @@ const Twit = require("twit");
 
 const T = new Twit(config);
 
+const username = "@snap_twt";
+
+function startTrackingMentions() {
+  const stream = T.stream("statuses/filter", { track: `${username} snap` });
+  stream.on("tweet", (tweet) => {
+    console.log(`Tweet mention detected: ${JSON.stringify(tweet)}`);
+  });
+}
+
 function requestTweet(tweetId, callback) {
   T.get("statuses/show/:id", { id: tweetId }, callback);
 }
@@ -28,4 +37,4 @@ function extractTweet(data) {
   return tweet;
 }
 
-module.exports = { requestTweet, extractTweet };
+module.exports = { requestTweet, extractTweet, startTrackingMentions };

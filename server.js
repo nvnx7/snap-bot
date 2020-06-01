@@ -7,7 +7,11 @@ const path = require("path");
 const url = require("url");
 
 const typeMap = require("./model/constants.js");
-const { requestTweet, extractTweet } = require("./controller/tweet.js");
+const {
+  requestTweet,
+  extractTweet,
+  startTrackingMentions,
+} = require("./controller/tweet.js");
 
 const app = express();
 
@@ -80,4 +84,6 @@ app.get("/tweet/:id", (req, res) => {
 
 const listener = app.listen(8080, () => {
   console.log(`Server started at ${listener.address().port}`);
+  startTrackingMentions();
+  console.log("Listening for mentions...");
 });
