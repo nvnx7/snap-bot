@@ -1,10 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
 const url = require("url");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const typeMap = require("./model/constants.js");
 const {
