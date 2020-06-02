@@ -1,4 +1,4 @@
-let btn;
+let downloadBtn;
 let themeControl;
 let likeControl;
 let imageControl;
@@ -9,7 +9,7 @@ let errorMessage;
 
 document.addEventListener("DOMContentLoaded", () => {
   // embedTweet("1262859072459726849");
-  btn = document.getElementById("download-btn");
+  downloadBtn = document.getElementById("download-btn");
   themeControl = document.getElementById("theme-control");
   likeControl = document.getElementById("like-control");
   imageControl = document.getElementById("image-control");
@@ -17,12 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
   loadingIndicator = createLoadingIndicator();
   errorMessage = createErrorMessage();
 
+  setEnableControls(false);
   setTweetLoading(true);
   const tweetId = window.location.pathname.split("/").pop();
 
   if (sessionStorage.getItem(tweetId)) {
     try {
       const tweet = JSON.parse(sessionStorage.getItem(tweetId));
+      setEnableControls(true);
       setTweet(tweet);
     } catch (err) {
       console.log("Error parsing tweet!");
@@ -36,12 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchTweet(tweetId, (tweetData) => {
       // console.log(`TweetData:${tweetData}`);
       // tweet = tweetData;
+      setEnableControls(true);
       setTweet(tweetData);
       setTweetLoading(false);
     });
   }
 
-  btn.addEventListener("click", () => {
+  downloadBtn.addEventListener("click", () => {
     takeShot();
   });
 

@@ -109,3 +109,10 @@ function setImageFromURL(url, targetImgElement) {
       reader.readAsDataURL(blob);
     });
 }
+
+function setEnableControls(enable) {
+  themeControl.querySelector(`input[name="theme"]`).disabled = !enable;
+  likeControl.querySelector(`input[name="like"]`).disabled = !enable;
+  imageControl.querySelector(`input[name="image"]`).disabled = !enable;
+  downloadBtn.disabled = !enable;
+}
