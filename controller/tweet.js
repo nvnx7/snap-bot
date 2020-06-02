@@ -34,6 +34,8 @@ function generateReply(tweet) {
 }
 
 function extractTweet(data) {
+  console.log(`\n Original tweet: ${JSON.stringify(data)}\n`);
+
   const tweet = {};
   tweet.id = data.id_str;
   tweet.author = data.user.name;
@@ -44,12 +46,24 @@ function extractTweet(data) {
   tweet.likeCount = data.favorite_count;
   tweet.createdAt = data.created_at; // UTC Time
   tweet.media = data.entities.media;
-  tweet.tokens = [
-    ...data.entities.hashtags,
-    ...data.entities.user_mentions,
-    ...data.entities.symbols,
-    ...data.entities.urls,
-  ];
+
+  const hashtags = data.entities.hashtags.map((hashtag) => {
+    return `#${hashtag.text}`;
+  });
+
+  const mentions = data.entities.user_mentions.map((mention) => {
+    return `@${mention.screen_name}`;
+  });
+
+  const symbols = data.entities.symbols.map((symbol) => {
+    return `$${symbol.text}`;
+  });
+
+  const urls = data.entities.urls.map((url) => {
+    return url.url;
+  });
+
+  tweet.tokens = [...hashtags, ...mentions, ...symbols, ...urls];
 
   return tweet;
 }
