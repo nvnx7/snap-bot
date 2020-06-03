@@ -52,7 +52,7 @@ function extractTweet(data) {
   tweet.createdAt = data.created_at; // UTC Time
   // tweet.media = data.entities.media;
   if (
-    data.extended_entities.media.length > 0 &&
+    data.extended_entities &&
     data.extended_entities.media[0].type === "photo"
   )
     tweet.media = data.extended_entities.media[0].media_url_https;
