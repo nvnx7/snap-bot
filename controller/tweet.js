@@ -20,8 +20,13 @@ function requestTweet(tweetId, callback) {
 function generateReply(tweet) {
   const statusId = tweet.id_str;
   const inReplyToStatusId = tweet.in_reply_to_status_id_str;
-  const inReplyToUsername = tweet.in_reply_to_screen_name;
-  const replyText = `@${inReplyToUsername} Go to http://localhost:8080/tweet/${inReplyToStatusId}`;
+  const username = tweet.user.screen_name;
+  let replyText;
+
+  if (inReplyToStatusId)
+    replyText = `@${username} Go to http://localhost:8080/tweet/${inReplyToStatusId}`;
+  else
+    replyText = `@${username} Well... that doesn't look like a reply to a thread 🙄. Check me out at @snap_twt to know how to use me 😀.`;
 
   T.post(
     "statuses/update",
@@ -45,7 +50,12 @@ function extractTweet(data) {
   tweet.tweetText = data.text;
   tweet.likeCount = data.favorite_count;
   tweet.createdAt = data.created_at; // UTC Time
-  tweet.media = data.entities.media;
+  // tweet.media = data.entities.media;
+  if (
+    data.extended_entities.media.length > 0 &&
+    data.extended_entities.media[0].type === "photo"
+  )
+    tweet.media = data.extended_entities.media[0].media_url_https;
 
   const hashtags = data.entities.hashtags.map((hashtag) => {
     return `#${hashtag.text}`;
