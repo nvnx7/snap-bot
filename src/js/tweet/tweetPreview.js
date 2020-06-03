@@ -7,7 +7,7 @@ function setTweet(tweet) {
     tweet.verified
   );
   setTweetFooter(tweet.likeCount, tweet.createdAt);
-  if (tweet.media) setTweetImage(tweet.media[0]);
+  if (tweet.media) setTweetImage(tweet.media);
   else {
     disableImageControl();
     setHideTweetImage(true);
