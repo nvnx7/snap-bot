@@ -19,9 +19,12 @@
 #tweet-wrapper {
   display: none;
   width: 490px;
+  /* max-width: 490px;
+  width: 98%; */
   line-height: 1.4;
   font-size: 16px;
   font-weight: normal;
+  margin-top: 24px;
 }
 
 #loading-indicator {

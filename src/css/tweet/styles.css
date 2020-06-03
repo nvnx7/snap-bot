@@ -1,6 +1,11 @@
+body {
+  position: absolute;
+}
+
 #wrapper {
   display: flex;
-  width: 100%;
+  width: 100vw;
+  min-width: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -47,4 +52,14 @@ input[type="radio"]:checked + span::after,
 input[type="checkbox"].filled-in:checked + span:not(.lever):after {
   background-color: #00acee;
   border: 2px solid #00acee;
+}
+
+@media only screen and (max-width: 600px) {
+  #customization-wrapper {
+    flex-direction: column;
+  }
+
+  #like-control {
+    border: none;
+  }
 }
