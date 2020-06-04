@@ -50,12 +50,14 @@ function extractTweet(data) {
   tweet.tweetText = data.text;
   tweet.likeCount = data.favorite_count;
   tweet.createdAt = data.created_at; // UTC Time
-  // tweet.media = data.entities.media;
-  if (
-    data.extended_entities &&
-    data.extended_entities.media[0].type === "photo"
-  )
-    tweet.media = data.extended_entities.media[0].media_url_https;
+
+  if (data.extended_entities) {
+    // Remove any media url text
+    const idx = data.extended_entities.media[0].indices[0];
+    tweet.tweetText = tweet.tweetText.slice(0, idx).trim();
+    if (data.extended_entities.media[0].type === "photo")
+      tweet.media = data.extended_entities.media[0].media_url_https;
+  }
 
   const hashtags = data.entities.hashtags.map((hashtag) => {
     return `#${hashtag.text}`;
