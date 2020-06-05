@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const url = require("url");
 const dotenv = require("dotenv");
+const favicon = require("serve-favicon");
 
 dotenv.config();
 
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(favicon(`${__dirname}/public/favicon.ico`));
 app.use("/public", express.static(`${__dirname}/public`));
 
 app.get("/", (req, res) => {
