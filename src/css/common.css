@@ -13,15 +13,46 @@ body {
   width: 100vw;
 }
 
-/* * {
-    outline: 1px solid red;
-  } */
+#navbar {
+  width: 100vw;
+  max-height: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ghostwhite;
+  padding: 12px 72px;
+}
 
-header {
-  font-size: 4em;
+#logo-container,
+#follow-container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+#logo-container > img {
+  width: 64px;
+}
+
+#logo-container > span {
+  font-size: 2em;
   font-weight: 700;
-  width: 100%;
-  text-align: center;
+}
+
+#follow-container {
+  border: solid #00acee 2px;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+#follow-container > img {
+  width: 32px;
+}
+
+#follow-container > span {
+  font-size: 1em;
+  font-weight: 600;
 }
 
 #tutorial-wrapper {
