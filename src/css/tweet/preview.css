@@ -18,7 +18,8 @@
 
 #tweet-wrapper {
   display: none;
-  width: 490px;
+  max-width: 500px;
+  width: 98%;
   /* max-width: 490px;
   width: 98%; */
   line-height: 1.4;
