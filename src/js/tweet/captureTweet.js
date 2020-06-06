@@ -56,7 +56,7 @@ function composeOptions(theme) {
 
   const viewportW = window.innerWidth;
   const viewportH = window.innerHeight;
-  const headerH = document.getElementById("app-header").clientHeight;
+  const headerH = document.getElementById("navbar").clientHeight;
   const wrapper = document.getElementById("tweet-wrapper");
 
   if (wrapper.clientWidth - viewportW > 0)
