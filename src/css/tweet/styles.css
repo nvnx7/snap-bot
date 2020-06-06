@@ -1,11 +1,6 @@
-/* body {
-  position: absolute;
-} */
-
 #wrapper {
   display: flex;
   width: 100%;
-  /* min-width: 500px; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -45,7 +40,6 @@ label {
 
 label > span {
   color: black;
-  /* margin: 10px; */
 }
 
 /* For changing defaults of Material CSS colors */
@@ -53,6 +47,10 @@ input[type="radio"]:checked + span::after,
 input[type="checkbox"].filled-in:checked + span:not(.lever):after {
   background-color: #00acee;
   border: 2px solid #00acee;
+}
+
+.spinner-layer {
+  border-color: #00acee !important;
 }
 
 @media only screen and (max-width: 600px) {
