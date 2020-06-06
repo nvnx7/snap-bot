@@ -2,7 +2,6 @@ function fetchTweet(tweetId, callback) {
   const data = new URLSearchParams();
   data.append("tweetUrl", `/tweet/${tweetId}`);
 
-  // const endpoint = `/tweet`;
   fetch("/tweet", {
     method: "POST",
     body: data,
@@ -17,7 +16,6 @@ function fetchTweet(tweetId, callback) {
       return response.json();
     })
     .then((tweetData) => {
-      // console.log(`Data retrieved ${tweetData}`);
       callback(tweetData);
     })
     .catch((err) => {
@@ -49,7 +47,6 @@ function composeOptions() {
   const options = {};
   options.allowTaint = true;
   options.removeContainer = true;
-  options.backgroundColor = "red";
 
   if (scrollbarYVisible()) {
     options.x =
@@ -66,8 +63,7 @@ function takeShot() {
   window.scrollTo(0, 0);
   html2canvas(document.getElementById("tweet-wrapper"), composeOptions()).then(
     (canvas) => {
-      document.body.appendChild(canvas);
-      // downloadImage(canvas.toDataURL());
+      downloadImage(canvas.toDataURL());
     }
   );
 }
@@ -108,7 +104,7 @@ function createLoadingIndicator() {
   elem.className = "preloader-wrapper active";
   elem.id = "loading-indicator";
 
-  elem.innerHTML = `<div class="spinner-layer spinner-blue-only">
+  elem.innerHTML = `<div class="spinner-layer">
     <div class="circle-clipper left">
       <div class="circle"></div>
     </div><div class="gap-patch">
