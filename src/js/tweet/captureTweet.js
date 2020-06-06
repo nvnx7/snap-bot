@@ -45,7 +45,7 @@ function downloadImage(uri, filename = "tweet.png") {
   }
 }
 
-function composeOptions(theme) {
+function composeOptions() {
   const options = {};
   options.allowTaint = true;
   options.removeContainer = true;
@@ -56,6 +56,7 @@ function composeOptions(theme) {
       tweetWrapper.getBoundingClientRect().left + getScrollbarWidth() / 2;
   }
 
+  const theme = tweetWrapper.className;
   options.backgroundColor = theme === "dark" ? "#000000" : "#ffffff";
 
   return options;
@@ -63,13 +64,12 @@ function composeOptions(theme) {
 
 function takeShot() {
   window.scrollTo(0, 0);
-  html2canvas(
-    document.getElementById("tweet-wrapper"),
-    composeOptions("light")
-  ).then((canvas) => {
-    document.body.appendChild(canvas);
-    // downloadImage(canvas.toDataURL());
-  });
+  html2canvas(document.getElementById("tweet-wrapper"), composeOptions()).then(
+    (canvas) => {
+      document.body.appendChild(canvas);
+      // downloadImage(canvas.toDataURL());
+    }
+  );
 }
 
 function getLocaleDateString(utcString) {
