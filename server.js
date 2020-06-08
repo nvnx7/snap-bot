@@ -57,7 +57,7 @@ app.get("/tweet/:id", (req, res) => {
   res.sendFile(`${__dirname}/view/tweet.html`);
 });
 
-const listener = app.listen(8080, () => {
+const listener = app.listen(process.env.PORT, () => {
   console.log(`Server started at ${listener.address().port}`);
   startTrackingMentions();
   console.log("Listening for mentions...");
