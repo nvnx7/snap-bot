@@ -50,7 +50,7 @@ function extractTweet(data) {
   tweet.id = data.id_str;
   tweet.author = data.user.name;
   tweet.username = data.user.screen_name;
-  tweet.profilePic = data.user.profile_image_url;
+  tweet.profilePic = data.user.profile_image_url_https;
   tweet.verified = data.user.verified;
   tweet.tweetText = data.text;
   tweet.likeCount = data.favorite_count;
