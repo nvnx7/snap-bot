@@ -102,15 +102,66 @@ body {
 }
 
 code.step {
-  background-color: whitesmoke;
+  background-color: white;
   color: #00acee;
   margin-left: 12px;
   padding: 4px;
 }
 
+#footer {
+  max-height: 72px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 18px 12px;
+  background-color: black;
+  color: white;
+  font-size: 0.9em;
+}
+
+#footer-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+#footer-logo-container > span {
+  font-weight: 700;
+}
+
+#footer-logo-container > img {
+  width: 36px;
+}
+
+#contacts-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#contacts-container > a {
+  display: flex;
+  color: white;
+  margin: 0 12px;
+  align-items: center;
+}
+
+#contacts-container > a > img {
+  width: 24px;
+}
+
 @media only screen and (max-width: 600px) {
   #navbar {
     padding: 12px 28px;
+  }
+
+  #footer {
+    max-height: 128px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #contacts-container {
+    flex-direction: column;
   }
 }
 
