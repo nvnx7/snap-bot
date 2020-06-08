@@ -5,10 +5,17 @@ const T = new Twit(config);
 
 const username = "@snap_twt";
 
+const salutaions = [
+  "See you again! 👋",
+  "Have a good one! ✌️",
+  "Cheers! 🍻",
+  "Share it if it's interesting! 🙏",
+];
+
 function startTrackingMentions() {
   const stream = T.stream("statuses/filter", { track: `${username} snap` });
   stream.on("tweet", (tweet) => {
-    console.log(`Tweet mention detected: ${JSON.stringify(tweet)}`);
+    // Auto reply if mentioned with keyword
     generateReply(tweet);
   });
 }
@@ -24,9 +31,9 @@ function generateReply(tweet) {
   let replyText;
 
   if (inReplyToStatusId)
-    replyText = `@${username} Go to http://localhost:8080/tweet/${inReplyToStatusId}`;
+    replyText = `@${username} Get your snapshot right here 👉 http://localhost:8080/tweet/${inReplyToStatusId}\n${getRandomSalutation()}`;
   else
-    replyText = `@${username} Well... that doesn't look like a reply to a thread 🙄. Check me out at @snap_twt to know how to use me 😀.`;
+    replyText = `@${username} Well... that doesn't look like a reply to a thread 🙄.\nCheck me out at @snap_twt to know how to use me 😀.`;
 
   T.post(
     "statuses/update",
@@ -39,8 +46,6 @@ function generateReply(tweet) {
 }
 
 function extractTweet(data) {
-  console.log(`\n Original tweet: ${JSON.stringify(data)}\n`);
-
   const tweet = {};
   tweet.id = data.id_str;
   tweet.author = data.user.name;
@@ -78,6 +83,10 @@ function extractTweet(data) {
   tweet.tokens = [...hashtags, ...mentions, ...symbols, ...urls];
 
   return tweet;
+}
+
+function getRandomSalutation() {
+  return salutaions[Math.floor(Math.random() * salutaions.length)];
 }
 
 module.exports = { requestTweet, extractTweet, startTrackingMentions };
