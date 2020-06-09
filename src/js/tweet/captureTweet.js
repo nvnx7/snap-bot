@@ -20,13 +20,23 @@ function fetchTweet(tweetId, callback) {
     })
     .catch((err) => {
       setTweetLoading(false);
+      // Remove any existing tweet cache if error
+      window.sessionStorage.removeItem(tweetId);
       console.log(`Error fetching data: ${err}`);
       if (err.name == "404") showErrorMessage(err.message);
       else showErrorMessage("Network error!");
     });
 }
 
-function downloadImage(uri, filename = "tweet.png") {
+function downloadImage(uri) {
+  let filename;
+  if (sessionStorage.getItem(tweetId)) {
+    const tweet = JSON.parse(sessionStorage.getItem(tweetId));
+    filename = `${tweet.author} tweet - ${tweet.id}`;
+  } else {
+    filename = `tweet ${new Date().getTime()}`;
+  }
+
   const link = document.createElement("a");
 
   if (typeof link.download === "string") {

@@ -6,9 +6,9 @@ let tweetWrapper;
 let hideImageHandler;
 let loadingIndicator;
 let errorMessage;
+let tweetId;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // embedTweet("1262859072459726849");
   downloadBtn = document.getElementById("download-btn");
   themeControl = document.getElementById("theme-control");
   likeControl = document.getElementById("like-control");
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setEnableControls(false);
   setTweetLoading(true);
-  const tweetId = window.location.pathname.split("/").pop();
+  tweetId = window.location.pathname.split("/").pop();
 
   if (sessionStorage.getItem(tweetId)) {
     try {
@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.log(`Tweet not found in local storage. Fetching...`);
     fetchTweet(tweetId, (tweetData) => {
-      // console.log(`TweetData:${tweetData}`);
-      // tweet = tweetData;
+      // Cache in session storage
+      window.sessionStorage.setItem(tweetData.id, JSON.stringify(tweetData));
       setEnableControls(true);
       setTweet(tweetData);
       setTweetLoading(false);
@@ -65,7 +65,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   imageControl.addEventListener("click", hideImageHandler);
-  // console.log(`TExT: ${tweet}`);
-
-  // setTweet(tweet);
 });
