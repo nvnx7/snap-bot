@@ -1,8 +1,12 @@
 const config = require("../model/config.js");
-const Twit = require("twit");
+const Twitter = require("twitter-lite");
 
-const T = new Twit(config);
+const client = new Twitter(config);
 
+const baseUrl =
+  process.env.NODE_ENV == "development"
+    ? "http://localhost:8080"
+    : "https://tweetsnapbot.herokuapp.com";
 const username = "@snap_twt";
 
 const salutaions = [
@@ -13,15 +17,33 @@ const salutaions = [
 ];
 
 function startTrackingMentions() {
-  const stream = T.stream("statuses/filter", { track: `${username} snap` });
-  stream.on("tweet", (tweet) => {
+  const stream = client.stream("statuses/filter", {
+    track: `${username} snap`,
+    tweet_mode: "extended",
+  });
+
+  stream.on("data", (tweet) => {
     // Auto reply if mentioned with keyword
+    console.log(`Mentioned in tweet: ${tweet.id_str}`);
+
     generateReply(tweet);
+  });
+
+  stream.on("error", (err) => {
+    console.log(`Stream error: ${err}`);
   });
 }
 
 function requestTweet(tweetId, callback) {
-  T.get("statuses/show/:id", { id: tweetId }, callback);
+  client
+    .get("statuses/show", { id: tweetId, tweet_mode: "extended" })
+    .then((data) => {
+      callback(null, data);
+    })
+    .catch((err) => {
+      console.log(`\nRequest tweet err\n${JSON.stringify(err)}`);
+      callback(err);
+    });
 }
 
 function generateReply(tweet) {
@@ -31,18 +53,21 @@ function generateReply(tweet) {
   let replyText;
 
   if (inReplyToStatusId)
-    replyText = `@${username} Get your snapshot right here 👉 http://localhost:8080/tweet/${inReplyToStatusId}\n${getRandomSalutation()}`;
+    replyText = `Hello @${username}!\nGet your snapshot right here 👉 ${baseUrl}/${inReplyToStatusId}\n${getRandomSalutation()}`;
   else
     replyText = `@${username} Well... that doesn't look like a reply to a thread 🙄.\nCheck me out at @snap_twt to know how to use me 😀.`;
 
-  T.post(
-    "statuses/update",
-    { status: replyText, in_reply_to_status_id: statusId },
-    (err, reply) => {
-      if (err) console.log(`Error replying to request: ${err}`);
-      else console.log(`Successfully replied: ${JSON.stringify(reply)}`);
-    }
-  );
+  client
+    .post("statuses/update", {
+      status: replyText,
+      in_reply_to_status_id: statusId,
+    })
+    .then((tweet) => {
+      console.log(`Successfully replied with tweet id ${tweet.id}`);
+    })
+    .catch((err) => {
+      console.log(`Error replying to a request: ${JSON.stringify(err)}`);
+    });
 }
 
 function extractTweet(data) {
@@ -52,7 +77,7 @@ function extractTweet(data) {
   tweet.username = data.user.screen_name;
   tweet.profilePic = data.user.profile_image_url_https;
   tweet.verified = data.user.verified;
-  tweet.tweetText = data.text;
+  tweet.tweetText = data.full_text;
   tweet.likeCount = data.favorite_count;
   tweet.createdAt = data.created_at; // UTC Time
 

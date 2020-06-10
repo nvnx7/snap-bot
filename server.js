@@ -38,13 +38,14 @@ app.post("/tweet", (req, res) => {
   if (!reg.test(tweetId))
     res.status(404).type("text").send(`Invalid tweet id: ${tweetId}`);
 
-  requestTweet(tweetId, (err, data, response) => {
+  requestTweet(tweetId, (err, tweetData) => {
+    // console.log(`\nFull tweet:\n${JSON.stringify(tweetData)}`);
     if (err) {
-      res.statusMessage = err.message;
+      res.statusMessage = err.errors[0].message;
       res.status(404).end();
     } else {
-      const tweetData = extractTweet(data);
-      res.status(200).json(tweetData);
+      const tweet = extractTweet(tweetData);
+      res.status(200).json(tweet);
     }
   });
 });
