@@ -53,7 +53,7 @@ function generateReply(tweet) {
   let replyText;
 
   if (inReplyToStatusId)
-    replyText = `Hello @${username}!\nGet your snapshot right here 👉 ${baseUrl}/${inReplyToStatusId}\n${getRandomSalutation()}`;
+    replyText = `Hello @${username}!\nGet your snapshot right here 👉 ${baseUrl}/tweet/${inReplyToStatusId}\n${getRandomSalutation()}`;
   else
     replyText = `@${username} Well... that doesn't look like a reply to a thread 🙄.\nCheck me out at @snap_twt to know how to use me 😀.`;
 
