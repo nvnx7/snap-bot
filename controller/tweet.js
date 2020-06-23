@@ -17,21 +17,26 @@ const salutaions = [
 ];
 
 function startTrackingMentions() {
-  const stream = client.stream("statuses/filter", {
-    track: `${username} snap`,
-    tweet_mode: "extended",
-  });
-
-  stream.on("data", (tweet) => {
-    // Auto reply if mentioned with keyword
-    console.log(`Mentioned in tweet: ${tweet.id_str}`);
-
-    generateReply(tweet);
-  });
-
-  stream.on("error", (err) => {
-    console.log(`Stream error: ${err}`);
-  });
+  const stream = client
+    .stream("statuses/filter", {
+      track: `${username} snap`,
+      tweet_mode: "extended",
+    })
+    .on("start", (response) =>
+      console.log(`Stream start. Response: ${JSON.stringify(response)}`)
+    )
+    .on("data", (tweet) => {
+      // Auto reply if mentioned with keyword
+      console.log(`Mentioned in tweet: ${tweet.id_str}`);
+      generateReply(tweet);
+    })
+    .on("ping", () => console.log("Stream ping."))
+    .on("error", (err) => {
+      console.log(`Stream error: ${err}`);
+    })
+    .on("end", (response) =>
+      console.log(`Stream end. Response: ${JSON.stringify(response)}`)
+    );
 }
 
 function requestTweet(tweetId, callback) {
