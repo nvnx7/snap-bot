@@ -16,15 +16,34 @@ const salutaions = [
   "Share it if it's interesting! 🙏",
 ];
 
+let stream;
+let timeout = 30000;
+
+function scheduleNextStreamStart(timeout) {
+  console.log(`Scheduled to restart stream in ${timeout} ms`);
+  setTimeout(startTrackingMentions, timeout);
+}
+
+function handleStreamStop() {
+  stream = null;
+  timeout = timeout * 2;
+
+  process.nextTick(() => {
+    scheduleNextStreamStart(timeout);
+  });
+}
+
 function startTrackingMentions() {
-  const stream = client
+  stream = client
     .stream("statuses/filter", {
       track: `${username} snap`,
       tweet_mode: "extended",
     })
-    .on("start", (response) =>
-      console.log(`Stream start. Response: ${JSON.stringify(response)}`)
-    )
+    .on("start", (response) => {
+      // Reset timeout to restart stream
+      timeout = 30000;
+      console.log(`Stream start. Response: ${JSON.stringify(response)}`);
+    })
     .on("data", (tweet) => {
       // Auto reply if mentioned with keyword
       console.log(`Mentioned in tweet: ${tweet.id_str}`);
@@ -33,10 +52,12 @@ function startTrackingMentions() {
     .on("ping", () => console.log("Stream ping."))
     .on("error", (err) => {
       console.log(`Stream error: ${err}`);
+      handleStreamStop();
     })
-    .on("end", (response) =>
-      console.log(`Stream end. Response: ${JSON.stringify(response)}`)
-    );
+    .on("end", (response) => {
+      console.log(`Stream end. Response: ${JSON.stringify(response)}`);
+      handleStreamStop();
+    });
 }
 
 function requestTweet(tweetId, callback) {
