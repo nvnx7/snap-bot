@@ -51,8 +51,7 @@ function startTrackingMentions() {
     })
     .on("ping", () => console.log("Stream ping."))
     .on("error", (err) => {
-      console.log(`Stream error: ${err}`);
-      handleStreamStop();
+      console.log(`Stream error: ${JSON.stringify(err)}`);
     })
     .on("end", (response) => {
       console.log(`Stream end. Response: ${JSON.stringify(response)}`);
